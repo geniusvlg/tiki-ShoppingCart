@@ -11,10 +11,10 @@ public class ShoppingCart {
     private double total;
     private static User owner;
 
-    public ShoppingCart(String name, String emailAddress) {
+    public ShoppingCart(User owner) {
         total = 0;
         products = new HashMap<Product, Integer>();
-        owner = new User(name, emailAddress);
+        this.owner = owner;
 
     }
 

@@ -1,6 +1,6 @@
 package product;
 
-public class Apple implements Product{
+public class Apple extends Product{
 
     @Override
     public String getName() {

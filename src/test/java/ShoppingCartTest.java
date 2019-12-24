@@ -15,6 +15,7 @@ public class ShoppingCartTest {
     @Test
     public void testCreateSecondtUser() {
         User user = new User("John Doe", "john.doe@example.com");
+        user.removeFromShoppingcart("apple", 1);
         user.addToShoppingCart("apple", 3);
         user.removeFromShoppingcart("apple", 1);
         assertEquals(user.getTotalMoney(), 9.9);

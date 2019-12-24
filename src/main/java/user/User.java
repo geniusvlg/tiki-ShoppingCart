@@ -6,7 +6,7 @@ import shoppingcart.ShoppingCart;
 public class User {
     private String name;
     private String emailAddress;
-    private static ShoppingCart shoppingCart;
+    private ShoppingCart shoppingCart = null;
 
     public String getName() {
         return name;
@@ -30,12 +30,15 @@ public class User {
         return shoppingCart.getTotalPrice();
     }
 
+    private void createShoppingCart() {
+        if(shoppingCart == null)
+            shoppingCart = new ShoppingCart(name, emailAddress);
+    }
 
     // one user should have only one shopping cart
    public User(String name, String emailAddress) {
         this.name = name;
         this.emailAddress = emailAddress;
-        shoppingCart = ShoppingCart.createShoppingCart(name, emailAddress);
    }
 
 }

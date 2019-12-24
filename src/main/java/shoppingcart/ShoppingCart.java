@@ -9,21 +9,13 @@ import java.util.Map;
 public class ShoppingCart {
     private HashMap<Product, Integer> products;
     private double total;
-    //private static User owner;
-    private static ShoppingCart shoppingCartInstance;
+    private static User owner;
 
-    private ShoppingCart(String name, String emailAddress) {
+    public ShoppingCart(String name, String emailAddress) {
         total = 0;
         products = new HashMap<Product, Integer>();
+        owner = new User(name, emailAddress);
 
-    }
-
-    public static ShoppingCart createShoppingCart(String name, String emailAddress) {
-        if(shoppingCartInstance == null) {
-            shoppingCartInstance = new ShoppingCart(name, emailAddress);
-        }
-
-        return shoppingCartInstance;
     }
 
     public void addProduct(Product newProduct, int amount) {
@@ -45,8 +37,15 @@ public class ShoppingCart {
 
 
     public boolean removeProduct(Product removedProduct, int amount) {
-        if(!products.containsKey(removedProduct))
+        if(products.size() == 0) {
+            System.out.println("No product to remove");
             return false;
+        }
+
+        if(!products.containsKey(removedProduct)) {
+            System.out.println("Product not found");
+            return false;
+        }
 
         if(products.get(removedProduct) < amount) {
             System.out.println("You remove more products than you have in the cart");
@@ -56,5 +55,9 @@ public class ShoppingCart {
         products.put(removedProduct, products.get(removedProduct) - amount);
         return true;
 
+    }
+
+    public User getOwner() {
+        return owner;
     }
 }

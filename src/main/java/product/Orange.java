@@ -1,6 +1,6 @@
 package product;
 
-public class Orange implements Product{
+public class Orange extends Product{
 
     @Override
     public String getName() {

@@ -1,6 +1,9 @@
 package product;
 
 public class Apple extends Product{
+    protected Apple() {
+
+    }
 
     @Override
     public String getName() {

@@ -1,40 +1,33 @@
 package shoppingcart;
 
 import product.Product;
-import user.User;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class ShoppingCart {
     private HashMap<Product, Integer> products;
     private double total;
-    private static User owner;
 
-    public ShoppingCart(User owner) {
+    public ShoppingCart() {
         total = 0;
         products = new HashMap<Product, Integer>();
-        this.owner = owner;
-
     }
 
     public void addProduct(Product newProduct, int amount) {
         if(products.containsKey(newProduct)) {
-            products.put(newProduct, products.get(newProduct) + amount);
+            Integer currentAmount = products.get(newProduct);
+            products.put(newProduct, currentAmount + amount);
+
         } else {
             products.put(newProduct, amount);
         }
+
+        total += newProduct.getPrice() * amount;
     }
 
     public double getTotalPrice() {
-        for(Map.Entry<Product, Integer> item: products.entrySet()) {
-            total += item.getKey().getPrice() * item.getValue();
-        }
-
-        return total;
+        return Math.round(total * 100.0) / 100.0;
     }
-
-
 
     public boolean removeProduct(Product removedProduct, int amount) {
         if(products.size() == 0) {
@@ -52,12 +45,12 @@ public class ShoppingCart {
             return false;
         }
 
-        products.put(removedProduct, products.get(removedProduct) - amount);
+        Integer currentAmount = products.get(removedProduct);
+        products.put(removedProduct, currentAmount - amount);
+        total -= removedProduct.getPrice() * amount;
+
         return true;
 
     }
 
-    public User getOwner() {
-        return owner;
-    }
 }

@@ -30,7 +30,9 @@ public class CartManagement {
 
     public void createCartForUser(User newUser) {
         ShoppingCart shoppingCart = new ShoppingCart();
-        cartMap.put(newUser, shoppingCart);
+        if(!cartMap.containsKey(newUser)) {
+            cartMap.put(newUser, shoppingCart);
+        }
     }
 
     public void addProductToShoppingCart(User currentUser, String productName, int amount) {
